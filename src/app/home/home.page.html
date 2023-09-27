@@ -1,9 +1,11 @@
 
 
-<ion-content [fullscreen]="true">
+<ion-content >
   
-  <div id="container">
-    <app-loader/>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<div id="container">
+
+  <ion-button (click)="loaderService.mostrarLoader()">Mostrar Loader</ion-button>
+  <app-loader *ngIf="loaderService.showLoader"/>
+</div>
+  
 </ion-content>

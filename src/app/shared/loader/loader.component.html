@@ -1,3 +1,10 @@
 
-  <ion-button (click)="mostrarLoader()">Mostrar Loader</ion-button>
-
+  
+  <div id="overlay"></div>
+  <ion-card id="container" #loader>
+    <div >
+      <ion-img [src]="slideCurrent.image" alt="Slide Image" class="img-loader"/>
+      <h2>{{ slideCurrent.text }}</h2>
+    </div>  
+  </ion-card>
+  

@@ -19,15 +19,17 @@ export class LoaderService {
     private navCtrl: NavController
   ) {}
   mostrarLoader() {
-    this.currentSlide = this.slides[0];
     this.showLoader = true;
     const interval = setInterval(() => {
       this.currentSlideIndex++;
       if (this.currentSlideIndex >= this.slides.length) {
         clearInterval(interval);
+        this.currentSlideIndex = 0;
+        this.currentSlide = this.slides[this.currentSlideIndex];
+        // this.showLoader = false;
         setTimeout(() => {
           this.showLoader = false;
-          this.navCtrl.navigateForward('/contact'); // Redirige a la otra vista.
+          this.navCtrl.navigateForward('/contact');
         }, 1000);
       } else {
         this.currentSlide = this.slides[this.currentSlideIndex];
@@ -36,14 +38,14 @@ export class LoaderService {
   }
   async presentLoading() {
     const loading = await this.loadingController.create({
-      message: 'Validando Datos...', // Mensaje que se mostrará en el loader
+      message: 'Validando Datos...',
       duration: 2000,
       cssClass: 'custom-loader',
     });
     await loading.present();
     setTimeout(() => {
-      loading.dismiss(); // Cierra el componente loader.
-      this.navCtrl.navigateForward('/contact'); // Redirige a la otra vista.
+      loading.dismiss();
+      this.navCtrl.navigateForward('/contact');
     }, 3000);
   }
 }

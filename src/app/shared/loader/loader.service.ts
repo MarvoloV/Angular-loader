@@ -18,25 +18,24 @@ export class LoaderService {
     public loadingController: LoadingController,
     private navCtrl: NavController
   ) {}
-  mostrarLoader() {
+  mostrarLoader(path: string) {
     this.showLoader = true;
     const interval = setInterval(() => {
       this.currentSlideIndex++;
       if (this.currentSlideIndex >= this.slides.length) {
-        clearInterval(interval);
         this.currentSlideIndex = 0;
         this.currentSlide = this.slides[this.currentSlideIndex];
-        // this.showLoader = false;
+        this.showLoader = false;
         setTimeout(() => {
           this.showLoader = false;
-          this.navCtrl.navigateForward('/contact');
+          this.navCtrl.navigateForward(path);
         }, 1000);
       } else {
         this.currentSlide = this.slides[this.currentSlideIndex];
       }
-    }, 1500);
+    }, 1000);
   }
-  async presentLoading() {
+  async presentLoading(path: string) {
     const loading = await this.loadingController.create({
       message: 'Validando Datos...',
       duration: 2000,
@@ -45,7 +44,7 @@ export class LoaderService {
     await loading.present();
     setTimeout(() => {
       loading.dismiss();
-      this.navCtrl.navigateForward('/contact');
+      this.navCtrl.navigateForward(path);
     }, 3000);
   }
 }
